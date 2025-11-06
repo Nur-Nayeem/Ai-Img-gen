@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FaImage, FaMagic } from "react-icons/fa";
 import { ImEarth } from "react-icons/im";
 import { RxCross2 } from "react-icons/rx";
+import Swal from "sweetalert2";
 
 const AIImageGenerator = ({ latestImg, setLatestImg }) => {
   const [prompt, setPrompt] = useState("");
@@ -41,7 +42,7 @@ const AIImageGenerator = ({ latestImg, setLatestImg }) => {
     } else apiPath = "/generate-image";
 
     axios
-      .post(`http://localhost:3000${apiPath}`, {
+      .post(`https://image-gen-server.vercel.app${apiPath}`, {
         prompt,
         image: imageBase64 || null,
       })
@@ -51,7 +52,11 @@ const AIImageGenerator = ({ latestImg, setLatestImg }) => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
         setLoading(false);
       });
   };
@@ -65,18 +70,25 @@ const AIImageGenerator = ({ latestImg, setLatestImg }) => {
 
     const base64Data = generatedImg.split(",")[1]; // Remove data:image/png;base64
     axios
-      .post("http://localhost:3000/publish-image", {
+      .post("https://image-gen-server.vercel.app/publish-image", {
         base64Image: base64Data,
         prompt,
       })
       .then((data) => {
-        console.log("Published:", data.data);
-        alert("Image published successfully!");
-        setLatestImg([data.data, ...latestImg]).slice(0, 6);
+        Swal.fire({
+          title: "Good job!",
+          text: "Image published successfully!",
+          icon: "success",
+        });
+        setLatestImg([data.data, ...latestImg]);
         setLoadingPublish(false);
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
         setLoadingPublish(false);
       });
   };

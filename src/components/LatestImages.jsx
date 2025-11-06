@@ -2,10 +2,18 @@ import React, { use, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import axios from "axios";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const latestImagePromise = axios
-  .get("http://localhost:3000/latest-images")
-  .then((data) => data.data);
+  .get("https://image-gen-server.vercel.app/latest-images")
+  .then((data) => data.data)
+  .catch((err) => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: err.message,
+    });
+  });
 
 const LatestImages = ({ latestImg, setLatestImg }) => {
   const latestImages = use(latestImagePromise);

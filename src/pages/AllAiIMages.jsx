@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ImageCard from "../components/ImageCard";
 import Loading from "../components/Loading";
+import Swal from "sweetalert2";
 
 const AllAiIMages = () => {
   const [allImages, setAllImages] = useState([]);
@@ -13,7 +14,9 @@ const AllAiIMages = () => {
   const fetchImages = async (page) => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/all-ai-images?page=${page}&limit=${limit}`)
+      .get(
+        `https://image-gen-server.vercel.app/all-ai-images?page=${page}&limit=${limit}`
+      )
       .then((data) => {
         console.log(data.data);
         setAllImages([...allImages, ...data.data.images]);
@@ -21,7 +24,11 @@ const AllAiIMages = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+        });
         setLoading(false);
       });
   };

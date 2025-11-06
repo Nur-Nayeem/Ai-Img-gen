@@ -2,8 +2,6 @@ import { createBrowserRouter } from "react-router";
 import Layout from "../Layout/Layout";
 import Home from "../pages/Home";
 import AllAiIMages from "../pages/AllAiIMages";
-import CreateNewImage from "../pages/CreateNewImage";
-import Loading from "../components/Loading";
 
 const router = createBrowserRouter([
   {
