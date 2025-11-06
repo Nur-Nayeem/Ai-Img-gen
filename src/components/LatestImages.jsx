@@ -1,7 +1,14 @@
-import React from "react";
+import React, { use } from "react";
 import ImageCard from "./ImageCard";
+import axios from "axios";
+
+const latestImagePromise = axios
+  .get("http://localhost:3000/latest-images")
+  .then((data) => data.data);
 
 const LatestImages = () => {
+  const latestImages = use(latestImagePromise);
+
   return (
     <section className="flex flex-col gap-6 my-10">
       <div className="flex flex-col items-center gap-2">
@@ -11,8 +18,8 @@ const LatestImages = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Array.from({ length: 6 }).map((image, index) => (
-          <ImageCard key={index} />
+        {latestImages.images.map((image, index) => (
+          <ImageCard key={index} image={image} />
         ))}
       </div>
     </section>
