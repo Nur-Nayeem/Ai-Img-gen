@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "ai-images",
+        path: "published-image",
         Component: AllAiIMages,
       },
       {
