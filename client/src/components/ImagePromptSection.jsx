@@ -94,13 +94,13 @@ const AIImageGenerator = ({ latestImg, setLatestImg }) => {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-10 bg-[#ecf0f1] p-8 rounded-2xl shadow-sm border border-base-300">
+    <div className="w-full max-w-7xl mx-auto mt-10 bg-[#dfe6e9] p-8 rounded-2xl shadow-sm border border-base-300">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* left side */}
         <div className="flex flex-col">
           <label className="font-semibold text-sm mb-2">Prompt</label>
           <textarea
-            className="textarea textarea-bordered w-full h-32 text-base focus:outline-0 border-primary bg-gray-100"
+            className="textarea textarea-bordered w-full h-32 text-base focus:outline-0 border-primary bg-[#ecf0f1]"
             placeholder="Write your prompt here..."
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
