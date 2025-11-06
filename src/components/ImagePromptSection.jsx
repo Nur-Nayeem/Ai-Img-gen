@@ -4,12 +4,13 @@ import { FaImage, FaMagic } from "react-icons/fa";
 import { ImEarth } from "react-icons/im";
 import { RxCross2 } from "react-icons/rx";
 
-const AIImageGenerator = () => {
+const AIImageGenerator = ({ latestImg, setLatestImg }) => {
   const [prompt, setPrompt] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [generatedImg, setGeneratedImg] = useState(null);
   const [imageBase64, setImageBase64] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingPublish, setLoadingPublish] = useState(false);
 
   // Convert uploaded file to base64
   const fileToBase64 = (file) => {
@@ -60,6 +61,7 @@ const AIImageGenerator = () => {
       alert("No image to publish or prompt missing");
       return;
     }
+    setLoadingPublish(true);
 
     const base64Data = generatedImg.split(",")[1]; // Remove data:image/png;base64
     axios
@@ -70,9 +72,12 @@ const AIImageGenerator = () => {
       .then((data) => {
         console.log("Published:", data.data);
         alert("Image published successfully!");
+        setLatestImg([data.data, ...latestImg]).slice(0, 6);
+        setLoadingPublish(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoadingPublish(false);
       });
   };
 
@@ -106,13 +111,24 @@ const AIImageGenerator = () => {
               onClick={handlePublish}
               className="btn flex items-center gap-2 bg-base-300 hover:bg-base-200 text-black"
             >
-              <ImEarth /> Publish
+              {loadingPublish ? (
+                <span className="loading loading-spinner loading-sm"></span>
+              ) : (
+                <ImEarth />
+              )}
+              Publish
             </button>
           </div>
         </div>
 
         {/* right side */}
         <div className="border-2 border-dashed border-base-300 rounded-xl flex flex-col items-center justify-center text-center p-6 transition cursor-pointer relative">
+          {loadingPublish && (
+            <div className="absolute w-full h-full bg-gray-300 flex justify-center items-center rounded-2xl">
+              <span className="loading loading-spinner loading-xl"></span>
+            </div>
+          )}
+
           {selectedImage ? (
             <>
               <RxCross2

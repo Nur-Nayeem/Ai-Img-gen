@@ -1,13 +1,18 @@
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import axios from "axios";
+import { Link } from "react-router";
 
 const latestImagePromise = axios
   .get("http://localhost:3000/latest-images")
   .then((data) => data.data);
 
-const LatestImages = () => {
+const LatestImages = ({ latestImg, setLatestImg }) => {
   const latestImages = use(latestImagePromise);
+
+  useEffect(() => {
+    setLatestImg(latestImages.images);
+  }, [latestImages, setLatestImg]);
 
   return (
     <section className="flex flex-col gap-6 my-10">
@@ -18,9 +23,14 @@ const LatestImages = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {latestImages.images.map((image, index) => (
+        {latestImg.slice(0, 6).map((image, index) => (
           <ImageCard key={index} image={image} />
         ))}
+      </div>
+      <div className="w-full flex justify-center my-4">
+        <Link to="/published-image" className="btn btn-primary">
+          Show All
+        </Link>
       </div>
     </section>
   );

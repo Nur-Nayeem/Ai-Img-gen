@@ -3,6 +3,7 @@ import Layout from "../Layout/Layout";
 import Home from "../pages/Home";
 import AllAiIMages from "../pages/AllAiIMages";
 import CreateNewImage from "../pages/CreateNewImage";
+import Loading from "../components/Loading";
 
 const router = createBrowserRouter([
   {
@@ -16,10 +17,6 @@ const router = createBrowserRouter([
       {
         path: "published-image",
         Component: AllAiIMages,
-      },
-      {
-        path: "create-new-image",
-        Component: CreateNewImage,
       },
     ],
   },
