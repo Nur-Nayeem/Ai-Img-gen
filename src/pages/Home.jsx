@@ -1,7 +1,12 @@
 import React from "react";
+import AIImageGenerator from "../components/ImagePromptSection";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <AIImageGenerator />
+    </div>
+  );
 };
 
 export default Home;
