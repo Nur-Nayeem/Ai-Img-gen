@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 .firebase
 .firebaserc
-firebase.json
+firebase.jsoncd
