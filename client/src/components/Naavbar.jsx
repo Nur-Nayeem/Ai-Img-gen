@@ -51,7 +51,7 @@ const Naavbar = () => {
       </div>
 
       <div className="navbar-end space-x-3.5">
-        <Link to={"/"} className="hidden sm:flex btn btn-primary">
+        <Link to={"/"} className="flex btn btn-primary">
           Generate New
         </Link>
       </div>

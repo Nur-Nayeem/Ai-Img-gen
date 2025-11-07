@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 
 const Layout = () => {
   return (
-    <div className="bg-[#c8d6e5] py-4">
+    <div className="bg-[#c8d6e5] py-4 px-2.5">
       <nav>
         <Naavbar />
       </nav>
