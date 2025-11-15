@@ -42,7 +42,7 @@ const AIImageGenerator = ({ latestImg, setLatestImg }) => {
     } else apiPath = "/generate-image";
 
     axios
-      .post(`https://image-gen-server.vercel.app${apiPath}`, {
+      .post(`http://localhost:3000${apiPath}`, {
         prompt,
         image: imageBase64 || null,
       })
