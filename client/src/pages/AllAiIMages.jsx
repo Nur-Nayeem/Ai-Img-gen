@@ -14,7 +14,9 @@ const AllAiIMages = () => {
   const fetchImages = async (page) => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/all-ai-images?page=${page}&limit=${limit}`)
+      .get(
+        `https://image-gen-server.vercel.app/all-ai-images?page=${page}&limit=${limit}`
+      )
       .then((data) => {
         console.log(data.data);
         setAllImages([...allImages, ...data.data.images]);

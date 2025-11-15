@@ -9,7 +9,7 @@ const ImageCard = ({ image }) => {
   const handleDetails = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/all-ai-images/${image._id}`
+        `https://image-gen-server.vercel.app/all-ai-images/${image._id}`
       );
       setImageUrl(res.data.url);
       modalRef.current.showModal();
